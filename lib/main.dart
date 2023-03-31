@@ -31,6 +31,7 @@ class AudioRecorder extends StatefulWidget {
 
 class _AudioRecorderState extends State<AudioRecorder> {
   int _recordDuration = 0;
+  List<String> transcribedText = [];
   Timer? _timer;
   final _audioRecorder = Record();
   StreamSubscription<RecordState>? _recordSub;
@@ -54,10 +55,14 @@ class _AudioRecorderState extends State<AudioRecorder> {
 
   Future<void> convertMp4ToWav(String inputPath, String outputPath) async {
     final arguments = [
-      '-i', inputPath,
-      '-ac', '1', // Set the number of audio channels to 1 for mono audio
-      '-ar', '16000', // Set the sample rate to 16000 Hz
-      '-acodec', 'pcm_s16le',
+      '-i',
+      inputPath,
+      '-ac',
+      '1',
+      '-ar',
+      '16000',
+      '-acodec',
+      'pcm_s16le',
       outputPath,
     ];
     await _flutterFFmpeg.executeWithArguments(arguments);
@@ -66,15 +71,6 @@ class _AudioRecorderState extends State<AudioRecorder> {
   Future<void> _start() async {
     try {
       if (await _audioRecorder.hasPermission()) {
-        // We don't do anything with this but printing
-        final isSupported = await _audioRecorder.isEncoderSupported(
-          AudioEncoder.aacLc,
-        );
-        print('${AudioEncoder.aacLc.name} supported: $isSupported');
-
-        // final devs = await _audioRecorder.listInputDevices();
-        // final isRecording = await _audioRecorder.isRecording();
-
         await _audioRecorder.start();
         _recordDuration = 0;
 
@@ -253,6 +249,7 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   bool showPlayer = false;
+  bool showText = false;
   String? audioPath;
 
   @override

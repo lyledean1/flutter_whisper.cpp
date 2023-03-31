@@ -1,5 +1,9 @@
 # whisper_gpt
 
+## Installing base models
+
+Small?
+
 A new Flutter project.
 
 ## Getting Started
