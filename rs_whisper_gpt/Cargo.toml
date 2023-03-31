@@ -1,0 +1,24 @@
+[package]
+name = "rs_whisper_gpt"
+version = "0.1.0"
+edition = "2021"
+
+[lib]
+name = "rs_whisper_gpt"
+crate-type = ["lib", "staticlib", "cdylib"]
+
+[build-dependencies]
+flutter_rust_bridge_codegen = "1.72.1"
+
+[dependencies]
+anyhow = "1.0.7"
+flutter_rust_bridge = "1.72.1"
+num = "0.4" 
+image = "0.24.3"  
+crossbeam = "0.8" 
+hound = "3"
+whisper-rs = "0.5.0"
+objc = "0.2.7"
+
+[target.'cfg(target_os = "ios")']
+rustflags = ["-l", "c++", "-l", "c++abi"]
