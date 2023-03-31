@@ -11,7 +11,7 @@ import 'package:uuid/uuid.dart';
 import 'dart:ffi' as ffi;
 
 abstract class RsWhisperGpt {
-  Future<List<String>> mainWav({dynamic hint});
+  Future<List<String>> mainWav({required String path, dynamic hint});
 
   FlutterRustBridgeTaskConstMeta get kMainWavConstMeta;
 }
@@ -25,12 +25,13 @@ class RsWhisperGptImpl implements RsWhisperGpt {
   factory RsWhisperGptImpl.wasm(FutureOr<WasmModule> module) =>
       RsWhisperGptImpl(module as ExternalLibrary);
   RsWhisperGptImpl.raw(this._platform);
-  Future<List<String>> mainWav({dynamic hint}) {
+  Future<List<String>> mainWav({required String path, dynamic hint}) {
+    var arg0 = _platform.api2wire_String(path);
     return _platform.executeNormal(FlutterRustBridgeTask(
-      callFfi: (port_) => _platform.inner.wire_main_wav(port_),
+      callFfi: (port_) => _platform.inner.wire_main_wav(port_, arg0),
       parseSuccessData: _wire2api_StringList,
       constMeta: kMainWavConstMeta,
-      argValues: [],
+      argValues: [path],
       hint: hint,
     ));
   }
@@ -38,7 +39,7 @@ class RsWhisperGptImpl implements RsWhisperGpt {
   FlutterRustBridgeTaskConstMeta get kMainWavConstMeta =>
       const FlutterRustBridgeTaskConstMeta(
         debugName: "main_wav",
-        argNames: [],
+        argNames: ["path"],
       );
 
   void dispose() {
@@ -65,6 +66,11 @@ class RsWhisperGptImpl implements RsWhisperGpt {
 
 // Section: api2wire
 
+@protected
+int api2wire_u8(int raw) {
+  return raw;
+}
+
 // Section: finalizer
 
 class RsWhisperGptPlatform extends FlutterRustBridgeBase<RsWhisperGptWire> {
@@ -73,6 +79,17 @@ class RsWhisperGptPlatform extends FlutterRustBridgeBase<RsWhisperGptWire> {
 
 // Section: api2wire
 
+  @protected
+  ffi.Pointer<wire_uint_8_list> api2wire_String(String raw) {
+    return api2wire_uint_8_list(utf8.encoder.convert(raw));
+  }
+
+  @protected
+  ffi.Pointer<wire_uint_8_list> api2wire_uint_8_list(Uint8List raw) {
+    final ans = inner.new_uint_8_list_0(raw.length);
+    ans.ref.ptr.asTypedList(raw.length).setAll(0, raw);
+    return ans;
+  }
 // Section: finalizer
 
 // Section: api_fill_to_wire
@@ -177,17 +194,35 @@ class RsWhisperGptWire implements FlutterRustBridgeWireBase {
 
   void wire_main_wav(
     int port_,
+    ffi.Pointer<wire_uint_8_list> path,
   ) {
     return _wire_main_wav(
       port_,
+      path,
     );
   }
 
-  late final _wire_main_wavPtr =
-      _lookup<ffi.NativeFunction<ffi.Void Function(ffi.Int64)>>(
-          'wire_main_wav');
-  late final _wire_main_wav =
-      _wire_main_wavPtr.asFunction<void Function(int)>();
+  late final _wire_main_wavPtr = _lookup<
+      ffi.NativeFunction<
+          ffi.Void Function(
+              ffi.Int64, ffi.Pointer<wire_uint_8_list>)>>('wire_main_wav');
+  late final _wire_main_wav = _wire_main_wavPtr
+      .asFunction<void Function(int, ffi.Pointer<wire_uint_8_list>)>();
+
+  ffi.Pointer<wire_uint_8_list> new_uint_8_list_0(
+    int len,
+  ) {
+    return _new_uint_8_list_0(
+      len,
+    );
+  }
+
+  late final _new_uint_8_list_0Ptr = _lookup<
+      ffi.NativeFunction<
+          ffi.Pointer<wire_uint_8_list> Function(
+              ffi.Int32)>>('new_uint_8_list_0');
+  late final _new_uint_8_list_0 = _new_uint_8_list_0Ptr
+      .asFunction<ffi.Pointer<wire_uint_8_list> Function(int)>();
 
   void free_WireSyncReturn(
     WireSyncReturn ptr,
@@ -205,6 +240,13 @@ class RsWhisperGptWire implements FlutterRustBridgeWireBase {
 }
 
 class _Dart_Handle extends ffi.Opaque {}
+
+class wire_uint_8_list extends ffi.Struct {
+  external ffi.Pointer<ffi.Uint8> ptr;
+
+  @ffi.Int32()
+  external int len;
+}
 
 typedef DartPostCObjectFnType = ffi.Pointer<
     ffi.NativeFunction<ffi.Bool Function(DartPort, ffi.Pointer<ffi.Void>)>>;

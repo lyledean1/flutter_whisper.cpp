@@ -41,13 +41,13 @@ fn parse_wav_file(path: &Path) -> Vec<i16> {
         .collect::<Vec<_>>()
 }
 
-pub fn main_wav() -> Vec<String> {
+pub fn main_wav(path: String) -> Vec<String> {
     let mut strings: Vec<String> = vec![];
     let result = autoreleasepool(|| {
-        let arg1 = get_resources_dir().join("output.wav");
-        let audio_path = Path::new(&arg1);
+        // let arg1 = get_resources_dir().join(path);
+        let audio_path = Path::new(&path);
         if !audio_path.exists() && !audio_path.is_file() {
-            panic!("expected a file");
+            panic!("expected a file at {:?}", audio_path);
         }
         let arg2 = get_resources_dir().join("ggml-base.en.bin");
         let whisper_path = Path::new(&arg2);

@@ -6,6 +6,7 @@ import 'package:flutter/foundation.dart';
 import 'package:record/record.dart';
 import 'package:whisper_gpt/bridge_generated.dart';
 import 'package:whisper_gpt/audio_player.dart';
+import 'package:flutter_ffmpeg/flutter_ffmpeg.dart';
 
 const base = 'rs_devices';
 final path = Platform.isWindows ? '$base.dll' : 'lib$base.so';
@@ -36,6 +37,7 @@ class _AudioRecorderState extends State<AudioRecorder> {
   RecordState _recordState = RecordState.stop;
   StreamSubscription<Amplitude>? _amplitudeSub;
   Amplitude? _amplitude;
+  final FlutterFFmpeg _flutterFFmpeg = FlutterFFmpeg();
 
   @override
   void initState() {
@@ -50,6 +52,17 @@ class _AudioRecorderState extends State<AudioRecorder> {
     super.initState();
   }
 
+  Future<void> convertMp4ToWav(String inputPath, String outputPath) async {
+    final arguments = [
+      '-i', inputPath,
+      '-ac', '1', // Set the number of audio channels to 1 for mono audio
+      '-ar', '16000', // Set the sample rate to 16000 Hz
+      '-acodec', 'pcm_s16le',
+      outputPath,
+    ];
+    await _flutterFFmpeg.executeWithArguments(arguments);
+  }
+
   Future<void> _start() async {
     try {
       if (await _audioRecorder.hasPermission()) {
@@ -57,9 +70,7 @@ class _AudioRecorderState extends State<AudioRecorder> {
         final isSupported = await _audioRecorder.isEncoderSupported(
           AudioEncoder.aacLc,
         );
-        if (kDebugMode) {
-          print('${AudioEncoder.aacLc.name} supported: $isSupported');
-        }
+        print('${AudioEncoder.aacLc.name} supported: $isSupported');
 
         // final devs = await _audioRecorder.listInputDevices();
         // final isRecording = await _audioRecorder.isRecording();
@@ -81,6 +92,13 @@ class _AudioRecorderState extends State<AudioRecorder> {
     _recordDuration = 0;
 
     final path = await _audioRecorder.stop();
+    String wavPath = path!.replaceAll(".m4a", ".wav");
+    await convertMp4ToWav(path, wavPath);
+
+    wavPath = wavPath.replaceAll("file://", "");
+    print("Wav path is ${wavPath}");
+    //
+    api.mainWav(path: wavPath).then((value) => print(value));
 
     if (path != null) {
       widget.onStop(path);

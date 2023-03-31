@@ -16,6 +16,7 @@ dependencies:
   audioplayers: ^1.0.1
   cupertino_icons: ^1.0.5
   freezed_annotation: ^2.1.0
+  flutter_ffmpeg: ^0.4.2
   ffi: ^2.0.1
 
 dev_dependencies:
