@@ -42,5 +42,4 @@ Check out the [flutter_rust_bridge User Guide](https://cjycode.com/flutter_rust_
 ## Optimisations on iOS 
 
 As per other examples in Whisper.cpp 
-- I've added `-DGGML_USE_ACCELERATE` compiler flag in Build Phasese
 - I've added `-O3 -DNDEBUG` to `Other C Flags`. But is not recommended for production/real world scenarios 
