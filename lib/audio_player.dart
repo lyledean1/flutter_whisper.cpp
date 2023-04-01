@@ -167,7 +167,7 @@ class AudioPlayerState extends State<AudioPlayer> {
   }
 
   Widget _buildTranscribeButton() {
-    return TextButton(
+    return ElevatedButton(
         child: const Text("Transcribe text"),
         onPressed: () => {
               widget.api.mainWav(path: widget.source).then((value) => {
