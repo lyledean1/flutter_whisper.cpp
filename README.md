@@ -10,13 +10,9 @@ Uses:
 - whisper-rs for Rust C bindings to Whisper.cpp [tazz4843 whisper-rs](https://github.com/tazz4843/whisper-rs)
 - Record Dart library for recording .m4a in iOS, some of the Dart code was copied over from the really useful example for the main screen! [llfbandit record](https://github.com/llfbandit/record)
 
-## Editing the whisper.cpp files 
+## Updating whisper.cpp files 
 
-I've included the files for [ggerganov Whisper.cpp](https://github.com/ggerganov/whisper.cpp) in the ios/Runner folder, which is this [commit](https://github.com/ggerganov/whisper.cpp/commit/0a2d1210bcb98978214bbf4e100922a413afd39d)
-
-To update:
-- Copy over the relevant files from [Whisper.cpp](https://github.com/ggerganov/whisper.cpp)
-- Update [whisper-rs](https://github.com/tazz4843/whisper-rs) if there are breaking changes in the C++ bindings to match updated whisper.cpp
+Update [whisper-rs](https://github.com/tazz4843/whisper-rs) and run the flutter_rust_bridge commands as detailed below. 
 
 ## Installing base models
 
