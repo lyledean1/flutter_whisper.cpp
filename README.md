@@ -1,20 +1,45 @@
-# whisper_gpt
+# Flutter Whisper.cpp
+
+Flutter App that has high-performance inference of [OpenAI's Whisper](https://github.com/openai/whisper) automatic speech recognition (ASR) model from [ggerganov Whisper.cpp](https://github.com/ggerganov/whisper.cpp)
+
+Note: I've only tested this on iOS with a Iphone 12 and an iPad Air (2022 M1 chip)
+
+Uses:
+- Whisper.cpp for OpenAI automatic speech recognition [ggerganov Whisper.cpp](https://github.com/ggerganov/whisper.cpp)
+- Flutter Rust Bridge for bindings from Flutter to Rust via FFI [fzyzcjy flutter_rust_bridge](https://github.com/fzyzcjy/flutter_rust_bridge)
+- whisper-rs for Rust C bindings to Whisper.cpp [tazz4843 whisper-rs](https://github.com/tazz4843/whisper-rs)
+- Record Dart library for recording .m4a in iOS, some of the Dart code was copied over from the really useful example for the main screen! [llfbandit record](https://github.com/llfbandit/record)
+
+## Editing the whisper.cpp files 
+
+I've included the files for [ggerganov Whisper.cpp](https://github.com/ggerganov/whisper.cpp) in the ios/Runner folder, which is this [commit](https://github.com/ggerganov/whisper.cpp/commit/0a2d1210bcb98978214bbf4e100922a413afd39d)
+
+To update:
+- Copy over the relevant files from [Whisper.cpp](https://github.com/ggerganov/whisper.cpp)
+- Update [whisper-rs](https://github.com/tazz4843/whisper-rs) if there are breaking changes in the C++ bindings to match updated whisper.cpp
 
 ## Installing base models
 
-Small?
+[See Whisper.cpp for Installing/Downloading Models](https://github.com/ggerganov/whisper.cpp/tree/master/models#readme)
 
-A new Flutter project.
+You will need to set the relevant model filename in the `/rs_whisper_gpt/api.rs` folder under the line of code
+```
+let base_model = get_resources_dir().join("ggml-tiny.en.bin");
+```
 
-## Getting Started
+And ensure the model is added to Xcode under the root of the Runner/Runner. Finally if the name is changed then run the flutter_rust_bridge_codegen as described below.
 
-This project is a starting point for a Flutter application.
+## Editing the Rust Bindings via Flutter Rust Bridge 
 
-A few resources to get you started if this is your first Flutter project:
+You will need to run the command 
+```
+flutter_rust_bridge_codegen --rust-input rs_whisper_gpt/src/api.rs --dart-output lib/bridge_generated.dart -c ios/Runner/bridge_generated.h
+```
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+Check out the [flutter_rust_bridge User Guide](https://cjycode.com/flutter_rust_bridge/) for more information
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## Optimisations on iOS 
+
+As per other examples in Whisper.cpp 
+- I've added `-DGGML_USE_ACCELERATE` compiler flag in Build Phasese
+- I've added `-O3 -DNDEBUG` to `Other C Flags`. But is not recommended for production/real world scenarios 

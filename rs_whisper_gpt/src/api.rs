@@ -49,8 +49,8 @@ pub fn main_wav(path: String) -> Vec<String> {
         if !audio_path.exists() && !audio_path.is_file() {
             panic!("expected a file at {:?}", audio_path);
         }
-        let arg2 = get_resources_dir().join("ggml-base.en.bin");
-        let whisper_path = Path::new(&arg2);
+        let base_model = get_resources_dir().join("ggml-base.en.bin");
+        let whisper_path = Path::new(&base_model);
         if !whisper_path.exists() && !whisper_path.is_file() {
             panic!("expected a whisper directory")
         }

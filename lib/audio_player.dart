@@ -3,10 +3,12 @@ import 'dart:async';
 import 'package:audioplayers/audioplayers.dart' as ap;
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:whisper_gpt/bridge_generated.dart';
 
 class AudioPlayer extends StatefulWidget {
   /// Path from where to play recorded audio
   final String source;
+  final RsWhisperGptImpl api;
 
   /// Callback when audio file should be removed
   /// Setting this to null hides the delete button
@@ -16,6 +18,7 @@ class AudioPlayer extends StatefulWidget {
     Key? key,
     required this.source,
     required this.onDelete,
+    required this.api,
   }) : super(key: key);
 
   @override
@@ -27,6 +30,8 @@ class AudioPlayerState extends State<AudioPlayer> {
   static const double _deleteBtnSize = 24;
 
   final _audioPlayer = ap.AudioPlayer();
+  List<String>? transcribedText;
+
   late StreamSubscription<void> _playerStateChangedSubscription;
   late StreamSubscription<Duration?> _durationChangedSubscription;
   late StreamSubscription<Duration> _positionChangedSubscription;
@@ -67,19 +72,26 @@ class AudioPlayerState extends State<AudioPlayer> {
   Widget build(BuildContext context) {
     return LayoutBuilder(
       builder: (context, constraints) {
-        return Row(
-          mainAxisSize: MainAxisSize.max,
-          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            _buildControl(),
-            _buildSlider(constraints.maxWidth),
-            IconButton(
-              icon: const Icon(Icons.delete,
-                  color: Color(0xFF73748D), size: _deleteBtnSize),
-              onPressed: () {
-                stop().then((value) => widget.onDelete());
-              },
+        return Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Row(
+              mainAxisSize: MainAxisSize.max,
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                _buildControl(),
+                _buildSlider(constraints.maxWidth),
+                IconButton(
+                  icon: const Icon(Icons.delete,
+                      color: Color(0xFF73748D), size: _deleteBtnSize),
+                  onPressed: () {
+                    stop().then((value) => widget.onDelete());
+                  },
+                ),
+              ],
             ),
+            _buildTranscribeButton(),
+            _buildTranscribedText(),
           ],
         );
       },
@@ -152,6 +164,26 @@ class AudioPlayerState extends State<AudioPlayer> {
     return _audioPlayer.play(
       kIsWeb ? ap.UrlSource(widget.source) : ap.DeviceFileSource(widget.source),
     );
+  }
+
+  Widget _buildTranscribeButton() {
+    return TextButton(
+        child: const Text("Transcribe text"),
+        onPressed: () => {
+              widget.api.mainWav(path: widget.source).then((value) => {
+                    setState(() {
+                      print(value);
+                      transcribedText = value;
+                    })
+                  })
+            });
+  }
+
+  Widget _buildTranscribedText() {
+    if (transcribedText != null) {
+      return Text("Transcribed text: ${transcribedText!.join(" ")}");
+    }
+    return Container();
   }
 
   Future<void> pause() => _audioPlayer.pause();
