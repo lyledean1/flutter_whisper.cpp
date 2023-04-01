@@ -30,7 +30,7 @@ class AudioPlayerState extends State<AudioPlayer> {
   static const double _deleteBtnSize = 24;
 
   final _audioPlayer = ap.AudioPlayer();
-  List<String> transcribedText = [];
+  List<String>? transcribedText;
 
   late StreamSubscription<void> _playerStateChangedSubscription;
   late StreamSubscription<Duration?> _durationChangedSubscription;
@@ -172,6 +172,7 @@ class AudioPlayerState extends State<AudioPlayer> {
         onPressed: () => {
               widget.api.mainWav(path: widget.source).then((value) => {
                     setState(() {
+                      print(value);
                       transcribedText = value;
                     })
                   })
@@ -179,10 +180,8 @@ class AudioPlayerState extends State<AudioPlayer> {
   }
 
   Widget _buildTranscribedText() {
-    if (transcribedText.isNotEmpty) {
-      List<Widget> widgetText = [];
-      transcribedText.map((v) => widgetText.add(Text(v)));
-      return Row(children: widgetText);
+    if (transcribedText != null) {
+      return Text("Transcribed text: ${transcribedText!.join(" ")}");
     }
     return Container();
   }

@@ -15,8 +15,8 @@
 		762E1A6129D63AD3009C829C /* output.wav in Resources */ = {isa = PBXBuildFile; fileRef = 762E1A5E29D63AD3009C829C /* output.wav */; };
 		762E1A6229D63AD3009C829C /* ggml-base.en.bin in Resources */ = {isa = PBXBuildFile; fileRef = 762E1A6029D63AD3009C829C /* ggml-base.en.bin */; };
 		762E1A6C29D64254009C829C /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 762E1A6B29D64254009C829C /* Accelerate.framework */; };
-		762E1A9129D77723009C829C /* whisper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 762E1A8B29D77723009C829C /* whisper.cpp */; };
-		762E1A9229D77723009C829C /* ggml.c in Sources */ = {isa = PBXBuildFile; fileRef = 762E1A8C29D77723009C829C /* ggml.c */; };
+		762E1A9129D77723009C829C /* whisper.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 762E1A8B29D77723009C829C /* whisper.cpp */; settings = {COMPILER_FLAGS = "-DGGML_USE_ACCELERATE"; }; };
+		762E1A9229D77723009C829C /* ggml.c in Sources */ = {isa = PBXBuildFile; fileRef = 762E1A8C29D77723009C829C /* ggml.c */; settings = {COMPILER_FLAGS = "-DGGML_USE_ACCELERATE"; }; };
 		762E1AD729D89647009C829C /* ggml-tiny.en.bin in Resources */ = {isa = PBXBuildFile; fileRef = 762E1AD529D89647009C829C /* ggml-tiny.en.bin */; };
 		97C146FC1CF9000F007C117D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FA1CF9000F007C117D /* Main.storyboard */; };
 		97C146FE1CF9000F007C117D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 97C146FD1CF9000F007C117D /* Assets.xcassets */; };
@@ -461,6 +461,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_CFLAGS = (
+					"-O3",
+					"-DNDEBUG",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.dean.whispergpt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -590,6 +594,10 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
+				OTHER_CFLAGS = (
+					"-O3",
+					"-DNDEBUG",
+				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.dean.whispergpt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
@@ -612,6 +620,10 @@
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
+				);
+				OTHER_CFLAGS = (
+					"-O3",
+					"-DNDEBUG",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = io.dean.whispergpt;
 				PRODUCT_NAME = "$(TARGET_NAME)";
