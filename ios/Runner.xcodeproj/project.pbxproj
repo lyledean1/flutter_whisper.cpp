@@ -72,8 +72,6 @@
 		762E1A6B29D64254009C829C /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		762E1A8429D776D3009C829C /* wrapper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = wrapper.h; sourceTree = "<group>"; };
 		762E1A8B29D77723009C829C /* whisper.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = whisper.cpp; path = ../../../whisper.cpp/whisper.cpp; sourceTree = "<group>"; };
-		762E1A8C29D77723009C829C /* ggml.c */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.c; name = ggml.c; path = ../../../whisper.cpp/ggml.c; sourceTree = "<group>"; };
-		762E1A8E29D77723009C829C /* ggml.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = ggml.h; path = ../../../whisper.cpp/ggml.h; sourceTree = "<group>"; };
 		762E1AD529D89647009C829C /* ggml-tiny.en.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; name = "ggml-tiny.en.bin"; path = "../../rs_whisper_gpt/ggml-tiny.en.bin"; sourceTree = "<group>"; };
 		76657D034A07AFCE92C08BE3 /* Pods-Runner.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Runner.debug.xcconfig"; path = "Target Support Files/Pods-Runner/Pods-Runner.debug.xcconfig"; sourceTree = "<group>"; };
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Release.xcconfig; path = Flutter/Release.xcconfig; sourceTree = "<group>"; };
@@ -153,8 +151,6 @@
 			isa = PBXGroup;
 			children = (
 				762E1AD529D89647009C829C /* ggml-tiny.en.bin */,
-				762E1A8C29D77723009C829C /* ggml.c */,
-				762E1A8E29D77723009C829C /* ggml.h */,
 				762E1A8B29D77723009C829C /* whisper.cpp */,
 				762E1A8429D776D3009C829C /* wrapper.h */,
 				762E1A6029D63AD3009C829C /* ggml-base.en.bin */,
