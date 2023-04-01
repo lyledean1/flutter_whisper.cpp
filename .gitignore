@@ -44,3 +44,4 @@ app.*.map.json
 /android/app/release
 output.wav
 ggml-base.en.bin
+ggml-tiny.en.bin

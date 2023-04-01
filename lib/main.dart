@@ -1,12 +1,14 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'dart:ffi';
-import 'dart:io';
+
 import 'package:flutter/foundation.dart';
 import 'package:record/record.dart';
-import 'package:whisper_gpt/bridge_generated.dart';
 import 'package:whisper_gpt/audio_player.dart';
 import 'package:flutter_ffmpeg/flutter_ffmpeg.dart';
+
+import 'package:whisper_gpt/bridge_generated.dart';
+import 'dart:ffi';
+import 'dart:io';
 
 const base = 'rs_devices';
 final path = Platform.isWindows ? '$base.dll' : 'lib$base.so';
@@ -31,7 +33,6 @@ class AudioRecorder extends StatefulWidget {
 
 class _AudioRecorderState extends State<AudioRecorder> {
   int _recordDuration = 0;
-  List<String> transcribedText = [];
   Timer? _timer;
   final _audioRecorder = Record();
   StreamSubscription<RecordState>? _recordSub;
@@ -87,14 +88,13 @@ class _AudioRecorderState extends State<AudioRecorder> {
     _timer?.cancel();
     _recordDuration = 0;
 
-    final path = await _audioRecorder.stop();
+    String? path = await _audioRecorder.stop();
     String wavPath = path!.replaceAll(".m4a", ".wav");
     await convertMp4ToWav(path, wavPath);
 
     wavPath = wavPath.replaceAll("file://", "");
-    print("Wav path is ${wavPath}");
-    //
-    api.mainWav(path: wavPath).then((value) => print(value));
+    //override path
+    path = wavPath;
 
     if (path != null) {
       widget.onStop(path);
@@ -262,28 +262,25 @@ class _MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return MaterialApp(
       home: Scaffold(
-        body: Center(
-          child: showPlayer
-              ? Padding(
-                  padding: const EdgeInsets.symmetric(horizontal: 25),
-                  child: AudioPlayer(
-                    source: audioPath!,
-                    onDelete: () {
-                      setState(() => showPlayer = false);
-                    },
-                  ),
-                )
-              : AudioRecorder(
-                  onStop: (path) {
-                    if (kDebugMode) print('Recorded file path: $path');
-                    setState(() {
-                      audioPath = path;
-                      showPlayer = true;
-                    });
-                  },
-                ),
-        ),
-      ),
+          body: Center(
+        child: showPlayer
+            ? AudioPlayer(
+                api: api,
+                source: audioPath!,
+                onDelete: () {
+                  setState(() => showPlayer = false);
+                },
+              )
+            : AudioRecorder(
+                onStop: (path) {
+                  if (kDebugMode) print('Recorded file path: $path');
+                  setState(() {
+                    audioPath = path;
+                    showPlayer = true;
+                  });
+                },
+              ),
+      )),
     );
   }
 }
