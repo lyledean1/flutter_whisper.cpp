@@ -14,7 +14,9 @@ To use the app, simply record speech by tapping the record button, and the app w
 
 ## Installation
 
-The app is currently available only on iOS and has been tested on an iPhone 12 and an iPad Air with a 2022 M1 chip. To install the app, follow these steps:
+The app has only been set up with iOS to start with and has been tested on an iPhone 12 and an iPad Air with a 2022 M1 chip. To install the app, follow these steps:
+
+*Note: due to using the ffmpeg library it's not currently working on the simulator, I will fix this but for the time being its recommended to use a real iOS device*
 
 1. Clone the repository to your local machine.
 2. Install the necessary dependencies and libraries as detailed in the README.
