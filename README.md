@@ -18,13 +18,16 @@ The app has only been set up with iOS to start with and has been tested on an iP
 
 *Note: due to using the ffmpeg library it's not currently working on the simulator, I will fix this but for the time being its recommended to use a real iOS device*
 
+### Running without changing the model 
 1. Clone the repository to your local machine.
-2. Install the necessary dependencies and libraries as detailed in the README.
-3. Add the relevant model filename to the /rs_whisper_gpt/api.rs folder under the line of code let base_model = get_resources_dir().join("ggml-base.en.bin");.
-4. Ensure the model is added to Xcode under the root of the Runner/Runner. [See Whisper.cpp for Installing/Downloading Models](https://github.com/ggerganov/whisper.cpp/tree/master/models#readme) - it is set up with `ggml-base.en.bin`
-5. Run the flutter_rust_bridge_codegen command as described below.
+2. Install the necessary dependencies and libraries, i.e `flutter pub get` in the main directory and `cargo build` in the `./rs_whisper_gpt` directory.
+3. Ensure the model is added to `/rs_whisper_gpt/ggml-base.en.bin` this is where XCode is currently looking for it. [See Whisper.cpp for Installing/Downloading Models](https://github.com/ggerganov/whisper.cpp/tree/master/models#readme) - it is set up with `ggml-base.en.bin`, 
 
-Note: I've only tested this on iOS with a Iphone 12 and an iPad Air (2022 M1 chip), its not been set up for Android or any other Flutter platforms
+### Changing the model
+1. Download a new model (i.e ggml-tiny.en.bin) [See Whisper.cpp for Installing/Downloading Models](https://github.com/ggerganov/whisper.cpp/tree/master/models#readme)
+2. Add a reference to this file in XCode, make sure its in the Runner/Runner directory (important for the lookup in the Rust code, or change the path in the Rust code to reference this)
+3. Update the Rust code in `./rs_whisper_gpt/src/api.rs` to reference the name of the model
+4. Run the flutter_rust_bridge_codegen command as described below to generate new bindings.
 
 ## Editing the Rust Bindings via Flutter Rust Bridge 
 
