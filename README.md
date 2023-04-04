@@ -22,6 +22,7 @@ The app has only been set up with iOS to start with and has been tested on an iP
 1. Clone the repository to your local machine.
 2. Install the necessary dependencies and libraries, i.e `flutter pub get` in the main directory and `cargo build` in the `./rs_whisper_gpt` directory.
 3. Ensure the model is added to `/rs_whisper_gpt/ggml-base.en.bin` this is where XCode is currently looking for it. [See Whisper.cpp for Installing/Downloading Models](https://github.com/ggerganov/whisper.cpp/tree/master/models#readme) - it is set up with `ggml-base.en.bin`, 
+4. Run `flutter run -d {device}`
 
 ### Changing the model
 1. Download a new model (i.e ggml-tiny.en.bin) [See Whisper.cpp for Installing/Downloading Models](https://github.com/ggerganov/whisper.cpp/tree/master/models#readme)
