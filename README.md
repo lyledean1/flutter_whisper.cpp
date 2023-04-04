@@ -3,7 +3,7 @@
 Flutter Whisper.cpp is a high-performance Flutter app that allows for fast and accurate automatic speech recognition (ASR) using [OpenAI's Whisper](https://openai.com/research/whisper) ASR model. Built on top of [ggerganov's Whisper.cpp](https://github.com/ggerganov/whisper.cpp), the app uses [flutter_rust_bridge](https://github.com/fzyzcjy/flutter_rust_bridge) to bind Flutter to Rust via FFI, and [whisper-rs](https://github.com/tazz4843/whisper-rs) for Rust C bindings to Whisper.cpp. The app also utilizes the [Record](https://github.com/llfbandit/record) Dart library for recording .m4a in iOS which is then converted to a .wav file.
 
 ## Purpose and Benefits
-The purpose of this app is to provide an example of performing automatic speech recognition using OpenAI's Whisper ASR model. The benefits of this approach include:
+The purpose of this app is to provide an example of performing automatic speech recognition using OpenAI's Whisper ASR model in Fluter. The benefits of this approach include:
 
 * High-performance inference of Whisper ASR model.
 * User-friendly interface for recording and transcribing speech.
