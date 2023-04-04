@@ -8,7 +8,7 @@ The purpose of this app is to provide an example of performing automatic speech 
 * High-performance inference of Whisper ASR model.
 * User-friendly interface for recording and transcribing speech.
 
-To use the app, simply record speech by tapping the record button, and the app will automatically transcribe the speech using the Whisper ASR model. The results are displayed in real-time, making it easy to see how accurate the transcription is.
+To use the app, simply record speech by tapping the record button, and the app will automatically transcribe the speech using the Whisper ASR model. The results are displayed relatively quickly (for the tests I ran it took < 1 second for a paragraph of speech after the optimisations detailed below), making it easy to see how accurate the transcription is.
 
 <img src="https://user-images.githubusercontent.com/20296911/229306858-56e52825-b16d-4b08-b810-75360bb65a2d.jpeg" width=150 height=216>
 
