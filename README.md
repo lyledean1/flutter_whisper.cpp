@@ -8,7 +8,7 @@ The example below took < 1 second to process the audio on an iPhone 12
 https://user-images.githubusercontent.com/20296911/229925629-9f4e9fa0-6165-4d96-b61b-a04f8105a1f6.MOV
 
 ## Purpose and Benefits
-The purpose of this app is to provide an example of performing automatic speech recognition using OpenAI's Whisper ASR model in Fluter. The benefits of this approach include:
+The purpose of this app is to provide an example of performing automatic speech recognition using OpenAI's Whisper ASR model in Flutter. The benefits of this approach include:
 
 * High-performance inference of Whisper ASR model.
 * User-friendly interface for recording and transcribing speech.
