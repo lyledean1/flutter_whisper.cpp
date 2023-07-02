@@ -21,16 +21,16 @@ use std::sync::Arc;
 
 // Section: wire functions
 
-fn wire_main_wav_impl(port_: MessagePort, path: impl Wire2Api<String> + UnwindSafe) {
+fn wire_run_whisper_model_impl(port_: MessagePort, path: impl Wire2Api<String> + UnwindSafe) {
     FLUTTER_RUST_BRIDGE_HANDLER.wrap(
         WrapInfo {
-            debug_name: "main_wav",
+            debug_name: "run_whisper_model",
             port: Some(port_),
             mode: FfiCallMode::Normal,
         },
         move || {
             let api_path = path.wire2api();
-            move |task_callback| Ok(main_wav(api_path))
+            move |task_callback| Ok(run_whisper_model(api_path))
         },
     )
 }

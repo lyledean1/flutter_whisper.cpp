@@ -2,8 +2,8 @@ use super::*;
 // Section: wire functions
 
 #[no_mangle]
-pub extern "C" fn wire_main_wav(port_: i64, path: *mut wire_uint_8_list) {
-    wire_main_wav_impl(port_, path)
+pub extern "C" fn wire_run_whisper_model(port_: i64, path: *mut wire_uint_8_list) {
+    wire_run_whisper_model_impl(port_, path)
 }
 
 // Section: allocate functions
