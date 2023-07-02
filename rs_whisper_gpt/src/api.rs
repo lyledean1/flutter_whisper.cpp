@@ -1,7 +1,7 @@
 use hound::{SampleFormat, WavReader};
+use objc::rc::autoreleasepool;
 use objc::runtime::Object;
 use objc::{class, msg_send, sel, sel_impl};
-use objc::rc::autoreleasepool;
 use std::path::{Path, PathBuf};
 use whisper_rs::{FullParams, SamplingStrategy, WhisperContext};
 
@@ -58,18 +58,37 @@ pub fn main_wav(path: String) -> Vec<String> {
         let original_samples = parse_wav_file(audio_path);
         let samples = whisper_rs::convert_integer_to_float_audio(&original_samples);
 
-        let mut ctx =
+        let ctx =
             WhisperContext::new(&whisper_path.to_string_lossy()).expect("failed to open model");
-        let params = FullParams::new(SamplingStrategy::default());
 
-        ctx.full(params, &samples)
+        let mut state = ctx.create_state().expect("failed to create state");
+
+        let mut params = FullParams::new(SamplingStrategy::default());
+
+        // edit things as needed
+        // here we set the number of threads to use to 1
+        params.set_n_threads(1);
+        // we also enable translation
+        params.set_translate(true);
+        // and set the language to translate to to english
+        params.set_language(Some("en"));
+        // we also explicitly disable anything that prints to stdout
+        params.set_print_special(false);
+        params.set_print_progress(true);
+        params.set_print_realtime(false);
+        params.set_print_timestamps(false);
+
+        let st = std::time::Instant::now();
+        state.full(params, &samples)
             .expect("failed to convert samples");
+        let et = std::time::Instant::now();
 
-        let num_segments = ctx.full_n_segments();
+        let num_segments = state.full_n_segments().expect("failed to get number of segments");
         for i in 0..num_segments {
-            let segment = ctx.full_get_segment_text(i).expect("failed to get segment");
+            let segment = state.full_get_segment_text(i).expect("failed to get segment");
             strings.push(segment);
         }
+        println!("took {}ms", (et - st).as_millis());
         strings
     });
     result
