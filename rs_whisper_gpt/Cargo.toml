@@ -8,7 +8,7 @@ name = "rs_whisper_gpt"
 crate-type = ["lib", "staticlib", "cdylib"]
 
 [build-dependencies]
-flutter_rust_bridge_codegen = "1.72.1"
+flutter_rust_bridge_codegen = "1.78.0"
 
 [dependencies]
 anyhow = "1.0.7"
@@ -21,4 +21,10 @@ whisper-rs = "0.8.0"
 objc = "0.2.7"
 
 [target.'cfg(target_os = "ios")']
+rustflags = ["-l", "c++", "-l", "c++abi"]
+
+[target.'cfg(target_os = "macos")']
+rustflags = ["-l", "c++", "-l", "c++abi"]
+
+[target.'cfg(target_os = "macosx")']
 rustflags = ["-l", "c++", "-l", "c++abi"]

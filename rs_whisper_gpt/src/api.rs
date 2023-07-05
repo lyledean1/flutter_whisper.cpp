@@ -1,4 +1,3 @@
-use flutter_rust_bridge::handler::Error;
 use hound::{SampleFormat, WavReader};
 use objc::rc::autoreleasepool;
 use objc::runtime::Object;

@@ -26,6 +26,9 @@
 		33CC10F32044A3C60003C045 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 33CC10F22044A3C60003C045 /* Assets.xcassets */; };
 		33CC10F62044A3C60003C045 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 33CC10F42044A3C60003C045 /* MainMenu.xib */; };
 		33CC11132044BFA00003C045 /* MainFlutterWindow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 33CC11122044BFA00003C045 /* MainFlutterWindow.swift */; };
+		7618F2E92A560F1C00285FE4 /* librs_whisper_gpt_static.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 7618F2D02A55B71100285FE4 /* librs_whisper_gpt_static.a */; };
+		7618F2FD2A561B3C00285FE4 /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 7618F2FB2A561B3C00285FE4 /* Accelerate.framework */; };
+		7618F3012A561B8600285FE4 /* ggml-base.en.bin in Resources */ = {isa = PBXBuildFile; fileRef = 7618F2FF2A561B8600285FE4 /* ggml-base.en.bin */; };
 		EC8FCE00D2B70B70E2636968 /* Pods_Runner.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 90C914FEAFCC7CE0F692389A /* Pods_Runner.framework */; };
 /* End PBXBuildFile section */
 
@@ -36,6 +39,27 @@
 			proxyType = 1;
 			remoteGlobalIDString = 33CC111A2044C6BA0003C045;
 			remoteInfo = FLX;
+		};
+		7618F2CF2A55B71100285FE4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7618F2CA2A55B71100285FE4 /* rs_whisper_gpt.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CA6069A660F95CB5C0E8AB29;
+			remoteInfo = "rs_whisper_gpt-staticlib";
+		};
+		7618F2D12A55B71100285FE4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7618F2CA2A55B71100285FE4 /* rs_whisper_gpt.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = CA60A81B485D87ABDA5741C1;
+			remoteInfo = "rs_whisper_gpt-cdylib";
+		};
+		7618F2E72A560F0E00285FE4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 7618F2CA2A55B71100285FE4 /* rs_whisper_gpt.xcodeproj */;
+			proxyType = 1;
+			remoteGlobalIDString = CA60A81B485DDBDFA8194C17;
+			remoteInfo = "rs_whisper_gpt-cdylib";
 		};
 /* End PBXContainerItemProxy section */
 
@@ -67,6 +91,10 @@
 		33E51913231747F40026EE4D /* DebugProfile.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = DebugProfile.entitlements; sourceTree = "<group>"; };
 		33E51914231749380026EE4D /* Release.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.entitlements; path = Release.entitlements; sourceTree = "<group>"; };
 		33E5194F232828860026EE4D /* AppInfo.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = AppInfo.xcconfig; sourceTree = "<group>"; };
+		7618F2CA2A55B71100285FE4 /* rs_whisper_gpt.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = rs_whisper_gpt.xcodeproj; path = ../../rs_whisper_gpt/rs_whisper_gpt.xcodeproj; sourceTree = "<group>"; };
+		7618F2F42A5614E400285FE4 /* bridge_generated.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = bridge_generated.h; sourceTree = "<group>"; };
+		7618F2FB2A561B3C00285FE4 /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
+		7618F2FF2A561B8600285FE4 /* ggml-base.en.bin */ = {isa = PBXFileReference; lastKnownFileType = archive.macbinary; name = "ggml-base.en.bin"; path = "../../rs_whisper_gpt/ggml-base.en.bin"; sourceTree = "<group>"; };
 		7AFA3C8E1D35360C0083082E /* Release.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Release.xcconfig; sourceTree = "<group>"; };
 		90C914FEAFCC7CE0F692389A /* Pods_Runner.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Runner.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9740EEB21CF90195004384FC /* Debug.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = Debug.xcconfig; sourceTree = "<group>"; };
@@ -80,6 +108,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				7618F2FD2A561B3C00285FE4 /* Accelerate.framework in Frameworks */,
+				7618F2E92A560F1C00285FE4 /* librs_whisper_gpt_static.a in Frameworks */,
 				EC8FCE00D2B70B70E2636968 /* Pods_Runner.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -142,6 +172,9 @@
 		33FAB671232836740065AC1E /* Runner */ = {
 			isa = PBXGroup;
 			children = (
+				7618F2FF2A561B8600285FE4 /* ggml-base.en.bin */,
+				7618F2F42A5614E400285FE4 /* bridge_generated.h */,
+				7618F2CA2A55B71100285FE4 /* rs_whisper_gpt.xcodeproj */,
 				33CC10F02044A3C60003C045 /* AppDelegate.swift */,
 				33CC11122044BFA00003C045 /* MainFlutterWindow.swift */,
 				33E51913231747F40026EE4D /* DebugProfile.entitlements */,
@@ -152,6 +185,15 @@
 			path = Runner;
 			sourceTree = "<group>";
 		};
+		7618F2CB2A55B71100285FE4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7618F2D02A55B71100285FE4 /* librs_whisper_gpt_static.a */,
+				7618F2D22A55B71100285FE4 /* rs_whisper_gpt.dylib */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		C3BD9F37323AD2DECE445C12 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -159,13 +201,13 @@
 				B5DC643251499D8FE7064C43 /* Pods-Runner.release.xcconfig */,
 				C097398CAE283BFE473A6B2D /* Pods-Runner.profile.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
 		D73912EC22F37F3D000D13A0 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				7618F2FB2A561B3C00285FE4 /* Accelerate.framework */,
 				90C914FEAFCC7CE0F692389A /* Pods_Runner.framework */,
 			);
 			name = Frameworks;
@@ -189,6 +231,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				7618F2E82A560F0E00285FE4 /* PBXTargetDependency */,
 				33CC11202044C79F0003C045 /* PBXTargetDependency */,
 			);
 			name = Runner;
@@ -233,6 +276,12 @@
 			mainGroup = 33CC10E42044A3C60003C045;
 			productRefGroup = 33CC10EE2044A3C60003C045 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 7618F2CB2A55B71100285FE4 /* Products */;
+					ProjectRef = 7618F2CA2A55B71100285FE4 /* rs_whisper_gpt.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				33CC10EC2044A3C60003C045 /* Runner */,
@@ -241,6 +290,23 @@
 		};
 /* End PBXProject section */
 
+/* Begin PBXReferenceProxy section */
+		7618F2D02A55B71100285FE4 /* librs_whisper_gpt_static.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = librs_whisper_gpt_static.a;
+			remoteRef = 7618F2CF2A55B71100285FE4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		7618F2D22A55B71100285FE4 /* rs_whisper_gpt.dylib */ = {
+			isa = PBXReferenceProxy;
+			fileType = "compiled.mach-o.dylib";
+			path = rs_whisper_gpt.dylib;
+			remoteRef = 7618F2D12A55B71100285FE4 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
+
 /* Begin PBXResourcesBuildPhase section */
 		33CC10EB2044A3C60003C045 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
@@ -248,6 +314,7 @@
 			files = (
 				33CC10F32044A3C60003C045 /* Assets.xcassets in Resources */,
 				33CC10F62044A3C60003C045 /* MainMenu.xib in Resources */,
+				7618F3012A561B8600285FE4 /* ggml-base.en.bin in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -352,6 +419,11 @@
 			target = 33CC111A2044C6BA0003C045 /* Flutter Assemble */;
 			targetProxy = 33CC111F2044C79F0003C045 /* PBXContainerItemProxy */;
 		};
+		7618F2E82A560F0E00285FE4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = "rs_whisper_gpt-cdylib";
+			targetProxy = 7618F2E72A560F0E00285FE4 /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
@@ -405,7 +477,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -418,6 +490,7 @@
 			baseConfigurationReference = 33E5194F232828860026EE4D /* AppInfo.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/DebugProfile.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -427,8 +500,14 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				OTHER_CFLAGS = (
+					"-O3",
+					"-DNDEBUG",
+				);
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				STRIP_STYLE = "non-global";
+				SWIFT_OBJC_BRIDGING_HEADER = Runner/bridge_generated.h;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Profile;
@@ -485,7 +564,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
@@ -532,7 +611,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = macosx;
 				SWIFT_COMPILATION_MODE = wholemodule;
@@ -545,6 +624,7 @@
 			baseConfigurationReference = 33E5194F232828860026EE4D /* AppInfo.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/DebugProfile.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -554,8 +634,14 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				OTHER_CFLAGS = (
+					"-O3",
+					"-DNDEBUG",
+				);
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				STRIP_STYLE = "non-global";
+				SWIFT_OBJC_BRIDGING_HEADER = Runner/bridge_generated.h;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 			};
@@ -566,6 +652,7 @@
 			baseConfigurationReference = 33E5194F232828860026EE4D /* AppInfo.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = Runner/Release.entitlements;
 				CODE_SIGN_STYLE = Automatic;
@@ -575,8 +662,14 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MACOSX_DEPLOYMENT_TARGET = 13.0;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				OTHER_CFLAGS = (
+					"-O3",
+					"-DNDEBUG",
+				);
 				PROVISIONING_PROFILE_SPECIFIER = "";
+				STRIP_STYLE = "non-global";
+				SWIFT_OBJC_BRIDGING_HEADER = Runner/bridge_generated.h;
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
