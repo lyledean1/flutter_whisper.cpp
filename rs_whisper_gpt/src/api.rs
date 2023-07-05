@@ -1,3 +1,4 @@
+use flutter_rust_bridge::handler::Error;
 use hound::{SampleFormat, WavReader};
 use objc::rc::autoreleasepool;
 use objc::runtime::Object;
@@ -41,7 +42,7 @@ fn parse_wav_file(path: &Path) -> Vec<i16> {
         .collect::<Vec<_>>()
 }
 
-fn get_text_segments(ctx: WhisperContext, samples: Vec<f32>) -> Vec<String> {
+fn run_whisper_audio_to_text(ctx: WhisperContext, samples: Vec<f32>) -> Vec<String> {
     let mut strings: Vec<String> = vec![];
     let mut state: whisper_rs::WhisperState<'_> =
         ctx.create_state().expect("failed to create state");
@@ -75,15 +76,15 @@ pub fn run_whisper_model(path: String) -> Vec<String> {
         let whisper_path = Path::new(&base_model);
         if !whisper_path.exists() && !whisper_path.is_file() {
             panic!("expected a whisper directory")
-        }
-
+        }        
         // Parse Wave File 
         let original_samples = parse_wav_file(audio_path);
         let samples = whisper_rs::convert_integer_to_float_audio(&original_samples);
         let ctx =
             WhisperContext::new(&whisper_path.to_string_lossy()).expect("failed to open model");
+
         // Run Whisper Model on Samples and Return Vec<String> of Text 
-        get_text_segments(ctx, samples)
+        run_whisper_audio_to_text(ctx, samples)
     });
     result
 }

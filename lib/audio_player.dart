@@ -170,7 +170,7 @@ class AudioPlayerState extends State<AudioPlayer> {
     return ElevatedButton(
         child: const Text("Transcribe text"),
         onPressed: () => {
-              widget.api.mainWav(path: widget.source).then((value) => {
+              widget.api.runWhisperModel(path: widget.source).then((value) => {
                     setState(() {
                       print(value);
                       transcribedText = value;

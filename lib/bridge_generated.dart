@@ -11,9 +11,9 @@ import 'package:uuid/uuid.dart';
 import 'dart:ffi' as ffi;
 
 abstract class RsWhisperGpt {
-  Future<List<String>> mainWav({required String path, dynamic hint});
+  Future<List<String>> runWhisperModel({required String path, dynamic hint});
 
-  FlutterRustBridgeTaskConstMeta get kMainWavConstMeta;
+  FlutterRustBridgeTaskConstMeta get kRunWhisperModelConstMeta;
 }
 
 class RsWhisperGptImpl implements RsWhisperGpt {
@@ -25,20 +25,20 @@ class RsWhisperGptImpl implements RsWhisperGpt {
   factory RsWhisperGptImpl.wasm(FutureOr<WasmModule> module) =>
       RsWhisperGptImpl(module as ExternalLibrary);
   RsWhisperGptImpl.raw(this._platform);
-  Future<List<String>> mainWav({required String path, dynamic hint}) {
+  Future<List<String>> runWhisperModel({required String path, dynamic hint}) {
     var arg0 = _platform.api2wire_String(path);
     return _platform.executeNormal(FlutterRustBridgeTask(
-      callFfi: (port_) => _platform.inner.wire_main_wav(port_, arg0),
+      callFfi: (port_) => _platform.inner.wire_run_whisper_model(port_, arg0),
       parseSuccessData: _wire2api_StringList,
-      constMeta: kMainWavConstMeta,
+      constMeta: kRunWhisperModelConstMeta,
       argValues: [path],
       hint: hint,
     ));
   }
 
-  FlutterRustBridgeTaskConstMeta get kMainWavConstMeta =>
+  FlutterRustBridgeTaskConstMeta get kRunWhisperModelConstMeta =>
       const FlutterRustBridgeTaskConstMeta(
-        debugName: "main_wav",
+        debugName: "run_whisper_model",
         argNames: ["path"],
       );
 
@@ -93,7 +93,6 @@ class RsWhisperGptPlatform extends FlutterRustBridgeBase<RsWhisperGptWire> {
 // Section: finalizer
 
 // Section: api_fill_to_wire
-
 }
 
 // ignore_for_file: camel_case_types, non_constant_identifier_names, avoid_positional_boolean_parameters, annotate_overrides, constant_identifier_names
@@ -192,21 +191,21 @@ class RsWhisperGptWire implements FlutterRustBridgeWireBase {
   late final _init_frb_dart_api_dl = _init_frb_dart_api_dlPtr
       .asFunction<int Function(ffi.Pointer<ffi.Void>)>();
 
-  void wire_main_wav(
+  void wire_run_whisper_model(
     int port_,
     ffi.Pointer<wire_uint_8_list> path,
   ) {
-    return _wire_main_wav(
+    return _wire_run_whisper_model(
       port_,
       path,
     );
   }
 
-  late final _wire_main_wavPtr = _lookup<
+  late final _wire_run_whisper_modelPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Void Function(
-              ffi.Int64, ffi.Pointer<wire_uint_8_list>)>>('wire_main_wav');
-  late final _wire_main_wav = _wire_main_wavPtr
+          ffi.Void Function(ffi.Int64,
+              ffi.Pointer<wire_uint_8_list>)>>('wire_run_whisper_model');
+  late final _wire_run_whisper_model = _wire_run_whisper_modelPtr
       .asFunction<void Function(int, ffi.Pointer<wire_uint_8_list>)>();
 
   ffi.Pointer<wire_uint_8_list> new_uint_8_list_0(
@@ -239,9 +238,9 @@ class RsWhisperGptWire implements FlutterRustBridgeWireBase {
       _free_WireSyncReturnPtr.asFunction<void Function(WireSyncReturn)>();
 }
 
-class _Dart_Handle extends ffi.Opaque {}
+final class _Dart_Handle extends ffi.Opaque {}
 
-class wire_uint_8_list extends ffi.Struct {
+final class wire_uint_8_list extends ffi.Struct {
   external ffi.Pointer<ffi.Uint8> ptr;
 
   @ffi.Int32()
