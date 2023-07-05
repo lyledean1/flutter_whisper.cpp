@@ -128,12 +128,6 @@ class _AudioRecorderState extends State<AudioRecorder> {
                 _buildText(),
               ],
             ),
-            // ignore amplitude
-            // if (_amplitude != null) ...[
-            //   const SizedBox(height: 40),
-            //   Text('Current: ${_amplitude?.current ?? 0.0}'),
-            //   Text('Max: ${_amplitude?.max ?? 0.0}'),
-            // ],
           ],
         ),
       ),
