@@ -48,7 +48,6 @@ fn run_whisper_audio_to_text(ctx: WhisperContext, samples: Vec<f32>) -> Vec<Stri
 
     let mut params = FullParams::new(SamplingStrategy::default());
 
-        // edit things as needed
     // here we set the number of threads to use to 1
     params.set_n_threads(1);
     // we also enable translation
@@ -62,6 +61,7 @@ fn run_whisper_audio_to_text(ctx: WhisperContext, samples: Vec<f32>) -> Vec<Stri
     params.set_print_timestamps(false);
 
     let st = std::time::Instant::now();
+    // Run whisper model inference
     state
         .full(params, &samples)
         .expect("failed to convert samples");
