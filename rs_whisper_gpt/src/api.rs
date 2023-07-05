@@ -46,11 +46,27 @@ fn run_whisper_audio_to_text(ctx: WhisperContext, samples: Vec<f32>) -> Vec<Stri
     let mut state: whisper_rs::WhisperState<'_> =
         ctx.create_state().expect("failed to create state");
 
-    let params = FullParams::new(SamplingStrategy::default());
+    let mut params = FullParams::new(SamplingStrategy::default());
 
+        // edit things as needed
+    // here we set the number of threads to use to 1
+    params.set_n_threads(1);
+    // we also enable translation
+    params.set_translate(true);
+    // and set the language to translate to to english
+    params.set_language(Some("en"));
+    // we also explicitly disable anything that prints to stdout
+    params.set_print_special(false);
+    params.set_print_progress(false);
+    params.set_print_realtime(false);
+    params.set_print_timestamps(false);
+
+    let st = std::time::Instant::now();
     state
         .full(params, &samples)
         .expect("failed to convert samples");
+    let et = std::time::Instant::now();
+
     let num_segments = state
         .full_n_segments()
         .expect("failed to get number of segments");
@@ -60,6 +76,7 @@ fn run_whisper_audio_to_text(ctx: WhisperContext, samples: Vec<f32>) -> Vec<Stri
             .expect("failed to get segment");
         strings.push(segment);
     }
+    println!("took {}ms", (et - st).as_millis());
     strings
 }
 

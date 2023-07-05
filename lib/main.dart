@@ -66,7 +66,6 @@ class _AudioRecorderState extends State<AudioRecorder> {
       'pcm_s16le',
       outputPath,
     ];
-    print(arguments.join(' '));
     await FFmpegKit.execute(arguments.join(' '));
   }
 
