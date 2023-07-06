@@ -180,11 +180,14 @@ class AudioPlayerState extends State<AudioPlayer> {
 
   Widget _buildTranscribedText() {
     if (transcribedText != null) {
-      return Padding(
-          padding: const EdgeInsets.only(top: 30),
-          child: Text(
-            transcribedText!.join(" "),
-          ));
+      return FractionallySizedBox(
+          widthFactor: 1 / 2,
+          alignment: Alignment.center,
+          child: Padding(
+              padding: const EdgeInsets.only(top: 30),
+              child: Text(
+                transcribedText!.join(" "),
+              )));
     }
     return Container();
   }
