@@ -1,0 +1,51 @@
+PODS:
+  - audioplayers_darwin (0.0.1):
+    - FlutterMacOS
+  - ffmpeg-kit-macos-https (5.1)
+  - ffmpeg_kit_flutter (5.1.0):
+    - ffmpeg_kit_flutter/https (= 5.1.0)
+    - FlutterMacOS
+  - ffmpeg_kit_flutter/https (5.1.0):
+    - ffmpeg-kit-macos-https (= 5.1)
+    - FlutterMacOS
+  - FlutterMacOS (1.0.0)
+  - path_provider_foundation (0.0.1):
+    - Flutter
+    - FlutterMacOS
+  - record_macos (0.2.0):
+    - FlutterMacOS
+
+DEPENDENCIES:
+  - audioplayers_darwin (from `Flutter/ephemeral/.symlinks/plugins/audioplayers_darwin/macos`)
+  - ffmpeg_kit_flutter (from `Flutter/ephemeral/.symlinks/plugins/ffmpeg_kit_flutter/macos`)
+  - FlutterMacOS (from `Flutter/ephemeral`)
+  - path_provider_foundation (from `Flutter/ephemeral/.symlinks/plugins/path_provider_foundation/darwin`)
+  - record_macos (from `Flutter/ephemeral/.symlinks/plugins/record_macos/macos`)
+
+SPEC REPOS:
+  trunk:
+    - ffmpeg-kit-macos-https
+
+EXTERNAL SOURCES:
+  audioplayers_darwin:
+    :path: Flutter/ephemeral/.symlinks/plugins/audioplayers_darwin/macos
+  ffmpeg_kit_flutter:
+    :path: Flutter/ephemeral/.symlinks/plugins/ffmpeg_kit_flutter/macos
+  FlutterMacOS:
+    :path: Flutter/ephemeral
+  path_provider_foundation:
+    :path: Flutter/ephemeral/.symlinks/plugins/path_provider_foundation/darwin
+  record_macos:
+    :path: Flutter/ephemeral/.symlinks/plugins/record_macos/macos
+
+SPEC CHECKSUMS:
+  audioplayers_darwin: dcad41de4fbd0099cb3749f7ab3b0cb8f70b810c
+  ffmpeg-kit-macos-https: ff9c8479ed36b20a4e07b265e1bddd36d62a7d7b
+  ffmpeg_kit_flutter: de6ad9df446c3b70c34033f49a163d05313eea61
+  FlutterMacOS: 8f6f14fa908a6fb3fba0cd85dbd81ec4b251fb24
+  path_provider_foundation: c68054786f1b4f3343858c1e1d0caaded73f0be9
+  record_macos: 937889e0f2a7a12b6fc14e97a3678e5a18943de6
+
+PODFILE CHECKSUM: f429f80f5470aff39540e8333365097246b857cb
+
+COCOAPODS: 1.12.1

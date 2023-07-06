@@ -4,13 +4,13 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:record/record.dart';
 import 'package:whisper_gpt/audio_player.dart';
-import 'package:flutter_ffmpeg/flutter_ffmpeg.dart';
+import 'package:ffmpeg_kit_flutter/ffmpeg_kit.dart';
 
 import 'package:whisper_gpt/bridge_generated.dart';
 import 'dart:ffi';
 import 'dart:io';
 
-const base = 'rs_devices';
+const base = 'rs_whisper_gpt';
 final path = Platform.isWindows ? '$base.dll' : 'lib$base.so';
 final dylib = Platform.isIOS
     ? DynamicLibrary.process()
@@ -39,7 +39,7 @@ class _AudioRecorderState extends State<AudioRecorder> {
   RecordState _recordState = RecordState.stop;
   StreamSubscription<Amplitude>? _amplitudeSub;
   Amplitude? _amplitude;
-  final FlutterFFmpeg _flutterFFmpeg = FlutterFFmpeg();
+  final FFmpegKit _flutterFFmpeg = FFmpegKit();
 
   @override
   void initState() {
@@ -66,7 +66,7 @@ class _AudioRecorderState extends State<AudioRecorder> {
       'pcm_s16le',
       outputPath,
     ];
-    await _flutterFFmpeg.executeWithArguments(arguments);
+    await FFmpegKit.execute(arguments.join(' '));
   }
 
   Future<void> _start() async {
@@ -128,12 +128,6 @@ class _AudioRecorderState extends State<AudioRecorder> {
                 _buildText(),
               ],
             ),
-            // ignore amplitude
-            // if (_amplitude != null) ...[
-            //   const SizedBox(height: 40),
-            //   Text('Current: ${_amplitude?.current ?? 0.0}'),
-            //   Text('Max: ${_amplitude?.max ?? 0.0}'),
-            // ],
           ],
         ),
       ),

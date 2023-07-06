@@ -77,10 +77,10 @@ class AudioPlayerState extends State<AudioPlayer> {
           children: [
             Row(
               mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 _buildControl(),
-                _buildSlider(constraints.maxWidth),
+                _buildSlider(constraints.maxWidth * 0.7),
                 IconButton(
                   icon: const Icon(Icons.delete,
                       color: Color(0xFF73748D), size: _deleteBtnSize),
@@ -170,9 +170,8 @@ class AudioPlayerState extends State<AudioPlayer> {
     return ElevatedButton(
         child: const Text("Transcribe text"),
         onPressed: () => {
-              widget.api.mainWav(path: widget.source).then((value) => {
+              widget.api.runWhisperModel(path: widget.source).then((value) => {
                     setState(() {
-                      print(value);
                       transcribedText = value;
                     })
                   })
@@ -181,7 +180,14 @@ class AudioPlayerState extends State<AudioPlayer> {
 
   Widget _buildTranscribedText() {
     if (transcribedText != null) {
-      return Text("Transcribed text: ${transcribedText!.join(" ")}");
+      return FractionallySizedBox(
+          widthFactor: 1 / 2,
+          alignment: Alignment.center,
+          child: Padding(
+              padding: const EdgeInsets.only(top: 30),
+              child: Text(
+                transcribedText!.join(" "),
+              )));
     }
     return Container();
   }

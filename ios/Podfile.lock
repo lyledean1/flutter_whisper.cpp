@@ -1,16 +1,16 @@
 PODS:
   - audioplayers_darwin (0.0.1):
     - Flutter
+  - ffmpeg-kit-ios-https (5.1)
+  - ffmpeg_kit_flutter (5.1.0):
+    - ffmpeg_kit_flutter/https (= 5.1.0)
+    - Flutter
+  - ffmpeg_kit_flutter/https (5.1.0):
+    - ffmpeg-kit-ios-https (= 5.1)
+    - Flutter
   - Flutter (1.0.0)
-  - flutter_ffmpeg (0.4.2):
-    - Flutter
-    - flutter_ffmpeg/https (= 0.4.2)
-  - flutter_ffmpeg/https (0.4.2):
-    - Flutter
-    - mobile-ffmpeg-https (= 4.4)
   - integration_test (0.0.1):
     - Flutter
-  - mobile-ffmpeg-https (4.4)
   - path_provider_foundation (0.0.1):
     - Flutter
     - FlutterMacOS
@@ -19,39 +19,39 @@ PODS:
 
 DEPENDENCIES:
   - audioplayers_darwin (from `.symlinks/plugins/audioplayers_darwin/ios`)
+  - ffmpeg_kit_flutter (from `.symlinks/plugins/ffmpeg_kit_flutter/ios`)
   - Flutter (from `Flutter`)
-  - flutter_ffmpeg (from `.symlinks/plugins/flutter_ffmpeg/ios`)
   - integration_test (from `.symlinks/plugins/integration_test/ios`)
-  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/ios`)
+  - path_provider_foundation (from `.symlinks/plugins/path_provider_foundation/darwin`)
   - record (from `.symlinks/plugins/record/ios`)
 
 SPEC REPOS:
   trunk:
-    - mobile-ffmpeg-https
+    - ffmpeg-kit-ios-https
 
 EXTERNAL SOURCES:
   audioplayers_darwin:
     :path: ".symlinks/plugins/audioplayers_darwin/ios"
+  ffmpeg_kit_flutter:
+    :path: ".symlinks/plugins/ffmpeg_kit_flutter/ios"
   Flutter:
     :path: Flutter
-  flutter_ffmpeg:
-    :path: ".symlinks/plugins/flutter_ffmpeg/ios"
   integration_test:
     :path: ".symlinks/plugins/integration_test/ios"
   path_provider_foundation:
-    :path: ".symlinks/plugins/path_provider_foundation/ios"
+    :path: ".symlinks/plugins/path_provider_foundation/darwin"
   record:
     :path: ".symlinks/plugins/record/ios"
 
 SPEC CHECKSUMS:
   audioplayers_darwin: 877d9a4d06331c5c374595e46e16453ac7eafa40
+  ffmpeg-kit-ios-https: 8dffbe1623a2f227be98fc314294847a97f818e4
+  ffmpeg_kit_flutter: 17e9f35a4ec996ac55051c20be05240f2a0b53e8
   Flutter: f04841e97a9d0b0a8025694d0796dd46242b2854
-  flutter_ffmpeg: 3ec3912c74649851e6c3b1885511eef78142ac4f
-  integration_test: a1e7d09bd98eca2fc37aefd79d4f41ad37bdbbe5
-  mobile-ffmpeg-https: 311fc4a8f671cf36d1d6b8f421e8246b790978d9
+  integration_test: 13825b8a9334a850581300559b8839134b124670
   path_provider_foundation: c68054786f1b4f3343858c1e1d0caaded73f0be9
   record: cae05d8dd3cdb1dea3511b20e5a5811a1ae00d0d
 
-PODFILE CHECKSUM: ef19549a9bc3046e7bb7d2fab4d021637c0c58a3
+PODFILE CHECKSUM: 57c8aed26fba39d3ec9424816221f294a07c58eb
 
-COCOAPODS: 1.11.3
+COCOAPODS: 1.12.1

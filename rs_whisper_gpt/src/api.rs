@@ -1,7 +1,7 @@
 use hound::{SampleFormat, WavReader};
+use objc::rc::autoreleasepool;
 use objc::runtime::Object;
 use objc::{class, msg_send, sel, sel_impl};
-use objc::rc::autoreleasepool;
 use std::path::{Path, PathBuf};
 use whisper_rs::{FullParams, SamplingStrategy, WhisperContext};
 
@@ -41,36 +41,66 @@ fn parse_wav_file(path: &Path) -> Vec<i16> {
         .collect::<Vec<_>>()
 }
 
-pub fn main_wav(path: String) -> Vec<String> {
+fn run_whisper_audio_to_text(ctx: WhisperContext, samples: Vec<f32>) -> Vec<String> {
     let mut strings: Vec<String> = vec![];
+    let mut state: whisper_rs::WhisperState<'_> =
+        ctx.create_state().expect("failed to create state");
+
+    let mut params = FullParams::new(SamplingStrategy::default());
+
+    // here we set the number of threads to use to 1
+    params.set_n_threads(1);
+    // we also enable translation
+    params.set_translate(true);
+    // and set the language to translate to to english
+    params.set_language(Some("en"));
+    // we also explicitly disable anything that prints to stdout
+    params.set_print_special(false);
+    params.set_print_progress(false);
+    params.set_print_realtime(false);
+    params.set_print_timestamps(false);
+
+    let st = std::time::Instant::now();
+    // Run whisper model inference
+    state
+        .full(params, &samples)
+        .expect("failed to convert samples");
+    let et = std::time::Instant::now();
+
+    let num_segments = state
+        .full_n_segments()
+        .expect("failed to get number of segments");
+    for i in 0..num_segments {
+        let segment = state
+            .full_get_segment_text(i)
+            .expect("failed to get segment");
+        strings.push(segment);
+    }
+    println!("took {}ms", (et - st).as_millis());
+    strings
+}
+
+pub fn run_whisper_model(path: String) -> Vec<String> {
     let result = autoreleasepool(|| {
-        // let arg1 = get_resources_dir().join(path);
+        //Get Audio Path inside iOS
         let audio_path = Path::new(&path);
         if !audio_path.exists() && !audio_path.is_file() {
             panic!("expected a file at {:?}", audio_path);
         }
+        // Load Base Model Weights
         let base_model = get_resources_dir().join("ggml-base.en.bin");
         let whisper_path = Path::new(&base_model);
         if !whisper_path.exists() && !whisper_path.is_file() {
             panic!("expected a whisper directory")
-        }
-
+        }        
+        // Parse Wave File 
         let original_samples = parse_wav_file(audio_path);
         let samples = whisper_rs::convert_integer_to_float_audio(&original_samples);
-
-        let mut ctx =
+        let ctx =
             WhisperContext::new(&whisper_path.to_string_lossy()).expect("failed to open model");
-        let params = FullParams::new(SamplingStrategy::default());
 
-        ctx.full(params, &samples)
-            .expect("failed to convert samples");
-
-        let num_segments = ctx.full_n_segments();
-        for i in 0..num_segments {
-            let segment = ctx.full_get_segment_text(i).expect("failed to get segment");
-            strings.push(segment);
-        }
-        strings
+        // Run Whisper Model on Samples and Return Vec<String> of Text 
+        run_whisper_audio_to_text(ctx, samples)
     });
     result
 }
