@@ -2,6 +2,8 @@
 
 Flutter Whisper.cpp allows offline/on device - fast and accurate automatic speech recognition (ASR) using [OpenAI's Whisper](https://openai.com/research/whisper) ASR model. Built on top of [ggerganov's Whisper.cpp](https://github.com/ggerganov/whisper.cpp), the app uses [flutter_rust_bridge](https://github.com/fzyzcjy/flutter_rust_bridge) to bind Flutter to Rust via FFI, and [whisper-rs](https://github.com/tazz4843/whisper-rs) for Rust C bindings to Whisper.cpp. The app also utilizes the [Record](https://github.com/llfbandit/record) Dart library for recording .m4a in iOS which is then converted to a .wav file.
 
+[Click here to see my talk at Fluttercon 2023 on using Rust with Flutter](https://www.droidcon.com/2023/08/07/supercharging-your-flutter-apps-with-rust/)
+
 Runs on:
 - [x] iOS
 - [ ] Android
