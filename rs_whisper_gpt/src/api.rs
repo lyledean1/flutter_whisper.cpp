@@ -92,14 +92,14 @@ pub fn run_whisper_model(path: String) -> Vec<String> {
         let whisper_path = Path::new(&base_model);
         if !whisper_path.exists() && !whisper_path.is_file() {
             panic!("expected a whisper directory")
-        }        
-        // Parse Wave File 
+        }
+        // Parse Wave File
         let original_samples = parse_wav_file(audio_path);
         let samples = whisper_rs::convert_integer_to_float_audio(&original_samples);
         let ctx =
             WhisperContext::new(&whisper_path.to_string_lossy()).expect("failed to open model");
 
-        // Run Whisper Model on Samples and Return Vec<String> of Text 
+        // Run Whisper Model on Samples and Return Vec<String> of Text
         run_whisper_audio_to_text(ctx, samples)
     });
     result
