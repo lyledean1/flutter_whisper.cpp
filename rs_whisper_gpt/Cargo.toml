@@ -17,7 +17,7 @@ num = "0.4"
 image = "0.24.3"  
 crossbeam = "0.8" 
 hound = "3"
-whisper-rs = {git = "https://github.com/tazz4843/whisper-rs"}
+whisper-rs = "0.8.0"
 objc = "0.2.7"
 
 [target.'cfg(target_os = "ios")']
