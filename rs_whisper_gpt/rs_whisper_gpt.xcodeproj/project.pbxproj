@@ -256,6 +256,7 @@
 				"CARGO_XCODE_TARGET_OS[sdk=macosx*]" = darwin;
 				CURRENT_PROJECT_VERSION = 0.1;
 				MARKETING_VERSION = 0.1.0;
+				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = rs_whisper_gpt;
 				SDKROOT = macosx;
 				SUPPORTS_MACCATALYST = YES;
