@@ -4,6 +4,8 @@ Flutter Whisper.cpp allows offline/on device - fast and accurate automatic speec
 
 [Click here to see my talk at Fluttercon 2023 on using Rust with Flutter](https://www.droidcon.com/2023/08/07/supercharging-your-flutter-apps-with-rust/)
 
+Tested with Flutter version 3.13.6 and Rust version 1.73.0
+
 Runs on:
 - [x] iOS
 - [ ] Android
@@ -46,7 +48,7 @@ The app has only been set up with iOS to start with and has been tested on an iP
 
 You will need to run the command 
 ```
-flutter_rust_bridge_codegen --rust-input rs_whisper_gpt/src/api.rs --dart-output lib/bridge_generated.dart -c ios/Runner/bridge_generated.h
+flutter_rust_bridge_codegen --rust-input rs_whisper_gpt/src/api.rs --dart-output lib/bridge_generated.dart -c ios/Runner/bridge_generated.h -e macos/Runner/
 ```
 Check out the [flutter_rust_bridge User Guide](https://cjycode.com/flutter_rust_bridge/) for more information
 

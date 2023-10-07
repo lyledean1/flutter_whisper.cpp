@@ -246,7 +246,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0920;
-				LastUpgradeCheck = 1300;
+				LastUpgradeCheck = 1430;
 				ORGANIZATIONNAME = "";
 				TargetAttributes = {
 					33CC10EC2044A3C60003C045 = {
@@ -504,6 +504,7 @@
 				OTHER_CFLAGS = (
 					"-O3",
 					"-DNDEBUG",
+					"-DACCELERATE_NEW_LAPACK",
 				);
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRIP_STYLE = "non-global";
@@ -638,6 +639,7 @@
 				OTHER_CFLAGS = (
 					"-O3",
 					"-DNDEBUG",
+					"-DACCELERATE_NEW_LAPACK",
 				);
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRIP_STYLE = "non-global";
@@ -666,6 +668,7 @@
 				OTHER_CFLAGS = (
 					"-O3",
 					"-DNDEBUG",
+					"-DACCELERATE_NEW_LAPACK",
 				);
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRIP_STYLE = "non-global";
