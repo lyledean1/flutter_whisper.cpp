@@ -35,7 +35,7 @@ The app has only been set up with iOS to start with and has been tested on an iP
 ### Running without changing the model 
 1. Clone the repository to your local machine.
 2. Install the necessary dependencies and libraries, i.e `flutter pub get` in the main directory and `cargo build` in the `./rs_whisper_gpt` directory.
-3. Ensure the model is added to `/rs_whisper_gpt/ggml-base.en.bin` this is where XCode is currently looking for it. [See Whisper.cpp for Installing/Downloading Models](https://github.com/ggerganov/whisper.cpp/tree/master/models#readme) - it is set up with `ggml-base.en.bin`, 
+3. Ensure the model is added to `/rs_whisper_gpt/ggml-base.en.bin` this is where XCode is currently looking for it. [See Whisper.cpp for Installing/Downloading Models](https://github.com/ggerganov/whisper.cpp/tree/master/models#readme) - it is set up with `ggml-base.en.bin`. 
 4. Run `flutter run -d {device}`
 
 ### Changing the model
@@ -43,6 +43,10 @@ The app has only been set up with iOS to start with and has been tested on an iP
 2. Add a reference to this file in XCode, make sure its in the Runner/Runner directory (important for the lookup in the Rust code, or change the path in the Rust code to reference this)
 3. Update the Rust code in `./rs_whisper_gpt/src/api.rs` to reference the name of the model
 4. Run the flutter_rust_bridge_codegen command as described below to generate new bindings.
+
+### Changing the language
+
+You can change the language of the model, you just need to set the language in the api call to the same code as the language you would like to use. You also need to make sure you use the correct model i.e ggml-tiny.bin instead of ggml-base.en.bin. See [OpenAI Whisper](https://github.com/openai/whisper#available-models-and-languages) for more details.
 
 ## Editing the Rust Bindings via Flutter Rust Bridge 
 
