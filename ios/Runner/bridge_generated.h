@@ -26,7 +26,9 @@ uintptr_t new_dart_opaque(Dart_Handle handle);
 
 intptr_t init_frb_dart_api_dl(void *obj);
 
-void wire_run_whisper_model(int64_t port_, struct wire_uint_8_list *path);
+void wire_run_whisper_model(int64_t port_,
+                            struct wire_uint_8_list *path,
+                            struct wire_uint_8_list *lang);
 
 struct wire_uint_8_list *new_uint_8_list_0(int32_t len);
 

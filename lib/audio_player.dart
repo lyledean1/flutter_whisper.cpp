@@ -170,11 +170,15 @@ class AudioPlayerState extends State<AudioPlayer> {
     return ElevatedButton(
         child: const Text("Transcribe text"),
         onPressed: () => {
-              widget.api.runWhisperModel(path: widget.source).then((value) => {
-                    setState(() {
-                      transcribedText = value;
-                    })
-                  })
+              widget.api
+                  // language will default to 'en' if not provided but this is to show an example
+                  // you also need to make sure the model you have loaded for Whisper.cpp matches what you have provided for the language
+                  .runWhisperModel(path: widget.source, lang: 'en')
+                  .then((value) => {
+                        setState(() {
+                          transcribedText = value;
+                        })
+                      })
             });
   }
 

@@ -41,7 +41,7 @@ fn parse_wav_file(path: &Path) -> Vec<i16> {
         .collect::<Vec<_>>()
 }
 
-fn run_whisper_audio_to_text(ctx: WhisperContext, samples: Vec<f32>) -> Vec<String> {
+fn run_whisper_audio_to_text(ctx: WhisperContext, samples: Vec<f32>, lang: Option<String>) -> Vec<String> {
     let mut strings: Vec<String> = vec![];
     let mut state: whisper_rs::WhisperState<'_> =
         ctx.create_state().expect("failed to create state");
@@ -52,8 +52,10 @@ fn run_whisper_audio_to_text(ctx: WhisperContext, samples: Vec<f32>) -> Vec<Stri
     params.set_n_threads(1);
     // we also enable translation
     params.set_translate(true);
-    // and set the language to translate to to english
-    params.set_language(Some("en"));
+    // and set the language to translate
+    // default to english, try to unwrap if provided
+    let lang_code = &lang.unwrap_or("en".to_string());
+    params.set_language(Some(&lang_code));
     // we also explicitly disable anything that prints to stdout
     params.set_print_special(false);
     params.set_print_progress(false);
@@ -80,7 +82,7 @@ fn run_whisper_audio_to_text(ctx: WhisperContext, samples: Vec<f32>) -> Vec<Stri
     strings
 }
 
-pub fn run_whisper_model(path: String) -> Vec<String> {
+pub fn run_whisper_model(path: String, lang: Option<String>) -> Vec<String> {
     let result = autoreleasepool(|| {
         //Get Audio Path inside iOS
         let audio_path = Path::new(&path);
@@ -100,7 +102,7 @@ pub fn run_whisper_model(path: String) -> Vec<String> {
             WhisperContext::new(&whisper_path.to_string_lossy()).expect("failed to open model");
 
         // Run Whisper Model on Samples and Return Vec<String> of Text
-        run_whisper_audio_to_text(ctx, samples)
+        run_whisper_audio_to_text(ctx, samples, lang)
     });
     result
 }
