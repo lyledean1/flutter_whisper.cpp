@@ -10,13 +10,13 @@ dependencies:
   flutter:
     sdk: flutter
   record: ^4.4.4
-  flutter_rust_bridge: ^1.82.4
+  flutter_rust_bridge: ^1.82.6
   path_provider: ^2.0.1
   audioplayers: ^5.2.1
   cupertino_icons: ^1.0.5
   freezed_annotation: ^2.1.0
   ffmpeg_kit_flutter: ^5.1.0
-  ffi: ^2.1.0
+  ffi: ^2.1.2
 
 dev_dependencies:
   flutter_test:
@@ -26,7 +26,7 @@ dev_dependencies:
   flutter_lints: ^1.0.0
   freezed: ^2.2.0
   build_runner: ^2.2.0
-  ffigen: ^11.0.0
+  ffigen: ^9.0.0
 
 
 flutter:
