@@ -7,7 +7,7 @@
 		<key>rs_whisper_gpt-cdylib.xcscheme_^#shared#^_</key>
 		<dict>
 			<key>orderHint</key>
-			<integer>8</integer>
+			<integer>10</integer>
 		</dict>
 		<key>rs_whisper_gpt-staticlib.xcscheme_^#shared#^_</key>
 		<dict>
