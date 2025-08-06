@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/foundation.dart';
 import 'package:record/record.dart';
 import 'package:whisper_gpt/audio_player.dart';
-import 'package:ffmpeg_kit_flutter/ffmpeg_kit.dart';
+import 'package:ffmpeg_kit_flutter_new/ffmpeg_kit.dart';
 
 import 'package:whisper_gpt/bridge_generated.dart';
 import 'dart:ffi';
