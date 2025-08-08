@@ -5,7 +5,6 @@ use objc::{class, msg_send, sel, sel_impl};
 use std::path::{Path, PathBuf};
 use whisper_rs::{FullParams, SamplingStrategy, WhisperContext};
 
-// Get current dir of the app
 fn get_resources_dir() -> PathBuf {
     let bundle: *mut Object = unsafe { msg_send![class!(NSBundle), mainBundle] };
     let resources_dir: *mut Object = unsafe { msg_send![bundle, resourcePath] };

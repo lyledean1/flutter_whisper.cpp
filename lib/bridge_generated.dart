@@ -127,77 +127,61 @@ class RsWhisperGptWire implements FlutterRustBridgeWireBase {
 
   /// The symbols are looked up with [lookup].
   RsWhisperGptWire.fromLookup(
-      ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName)
-          lookup)
-      : _lookup = lookup;
+    ffi.Pointer<T> Function<T extends ffi.NativeType>(String symbolName) lookup,
+  ) : _lookup = lookup;
 
-  void store_dart_post_cobject(
-    DartPostCObjectFnType ptr,
-  ) {
-    return _store_dart_post_cobject(
-      ptr,
-    );
+  void store_dart_post_cobject(DartPostCObjectFnType ptr) {
+    return _store_dart_post_cobject(ptr);
   }
 
   late final _store_dart_post_cobjectPtr =
       _lookup<ffi.NativeFunction<ffi.Void Function(DartPostCObjectFnType)>>(
-          'store_dart_post_cobject');
+    'store_dart_post_cobject',
+  );
   late final _store_dart_post_cobject = _store_dart_post_cobjectPtr
       .asFunction<void Function(DartPostCObjectFnType)>();
 
-  Object get_dart_object(
-    int ptr,
-  ) {
-    return _get_dart_object(
-      ptr,
-    );
+  Object get_dart_object(int ptr) {
+    return _get_dart_object(ptr);
   }
 
   late final _get_dart_objectPtr =
       _lookup<ffi.NativeFunction<ffi.Handle Function(ffi.UintPtr)>>(
-          'get_dart_object');
+    'get_dart_object',
+  );
   late final _get_dart_object =
       _get_dart_objectPtr.asFunction<Object Function(int)>();
 
-  void drop_dart_object(
-    int ptr,
-  ) {
-    return _drop_dart_object(
-      ptr,
-    );
+  void drop_dart_object(int ptr) {
+    return _drop_dart_object(ptr);
   }
 
   late final _drop_dart_objectPtr =
       _lookup<ffi.NativeFunction<ffi.Void Function(ffi.UintPtr)>>(
-          'drop_dart_object');
+    'drop_dart_object',
+  );
   late final _drop_dart_object =
       _drop_dart_objectPtr.asFunction<void Function(int)>();
 
-  int new_dart_opaque(
-    Object handle,
-  ) {
-    return _new_dart_opaque(
-      handle,
-    );
+  int new_dart_opaque(Object handle) {
+    return _new_dart_opaque(handle);
   }
 
   late final _new_dart_opaquePtr =
       _lookup<ffi.NativeFunction<ffi.UintPtr Function(ffi.Handle)>>(
-          'new_dart_opaque');
+    'new_dart_opaque',
+  );
   late final _new_dart_opaque =
       _new_dart_opaquePtr.asFunction<int Function(Object)>();
 
-  int init_frb_dart_api_dl(
-    ffi.Pointer<ffi.Void> obj,
-  ) {
-    return _init_frb_dart_api_dl(
-      obj,
-    );
+  int init_frb_dart_api_dl(ffi.Pointer<ffi.Void> obj) {
+    return _init_frb_dart_api_dl(obj);
   }
 
   late final _init_frb_dart_api_dlPtr =
       _lookup<ffi.NativeFunction<ffi.IntPtr Function(ffi.Pointer<ffi.Void>)>>(
-          'init_frb_dart_api_dl');
+    'init_frb_dart_api_dl',
+  );
   late final _init_frb_dart_api_dl = _init_frb_dart_api_dlPtr
       .asFunction<int Function(ffi.Pointer<ffi.Void>)>();
 
@@ -206,27 +190,25 @@ class RsWhisperGptWire implements FlutterRustBridgeWireBase {
     ffi.Pointer<wire_uint_8_list> path,
     ffi.Pointer<wire_uint_8_list> lang,
   ) {
-    return _wire_run_whisper_model(
-      port_,
-      path,
-      lang,
-    );
+    return _wire_run_whisper_model(port_, path, lang);
   }
 
   late final _wire_run_whisper_modelPtr = _lookup<
       ffi.NativeFunction<
-          ffi.Void Function(ffi.Int64, ffi.Pointer<wire_uint_8_list>,
-              ffi.Pointer<wire_uint_8_list>)>>('wire_run_whisper_model');
+          ffi.Void Function(
+            ffi.Int64,
+            ffi.Pointer<wire_uint_8_list>,
+            ffi.Pointer<wire_uint_8_list>,
+          )>>('wire_run_whisper_model');
   late final _wire_run_whisper_model = _wire_run_whisper_modelPtr.asFunction<
       void Function(
-          int, ffi.Pointer<wire_uint_8_list>, ffi.Pointer<wire_uint_8_list>)>();
+        int,
+        ffi.Pointer<wire_uint_8_list>,
+        ffi.Pointer<wire_uint_8_list>,
+      )>();
 
-  ffi.Pointer<wire_uint_8_list> new_uint_8_list_0(
-    int len,
-  ) {
-    return _new_uint_8_list_0(
-      len,
-    );
+  ffi.Pointer<wire_uint_8_list> new_uint_8_list_0(int len) {
+    return _new_uint_8_list_0(len);
   }
 
   late final _new_uint_8_list_0Ptr = _lookup<
@@ -236,17 +218,14 @@ class RsWhisperGptWire implements FlutterRustBridgeWireBase {
   late final _new_uint_8_list_0 = _new_uint_8_list_0Ptr
       .asFunction<ffi.Pointer<wire_uint_8_list> Function(int)>();
 
-  void free_WireSyncReturn(
-    WireSyncReturn ptr,
-  ) {
-    return _free_WireSyncReturn(
-      ptr,
-    );
+  void free_WireSyncReturn(WireSyncReturn ptr) {
+    return _free_WireSyncReturn(ptr);
   }
 
   late final _free_WireSyncReturnPtr =
       _lookup<ffi.NativeFunction<ffi.Void Function(WireSyncReturn)>>(
-          'free_WireSyncReturn');
+    'free_WireSyncReturn',
+  );
   late final _free_WireSyncReturn =
       _free_WireSyncReturnPtr.asFunction<void Function(WireSyncReturn)>();
 }
