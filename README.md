@@ -4,7 +4,7 @@ Flutter Whisper.cpp allows offline/on device - fast and accurate automatic speec
 
 [Click here to see my talk at Fluttercon 2023 on using Rust with Flutter](https://www.droidcon.com/2023/08/07/supercharging-your-flutter-apps-with-rust/)
 
-Tested with Flutter version 3.19.5 and Rust version 1.77.1
+Tested with Flutter version 3.32.8 and Rust version 1.77.1
 
 Runs on:
 - [x] iOS (17.0.3 and XCode 15.0)
